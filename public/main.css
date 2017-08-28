@@ -1,0 +1,17 @@
+body {
+	background-image: url('./img/background.jpg');
+}
+
+h1 {
+	text-align: center;
+	font-size: 40px;
+	color: white;
+}
+
+h5 {
+	color: white;
+}
+
+#mainTable{
+	background-color: white;
+}

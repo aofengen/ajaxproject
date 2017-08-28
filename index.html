@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="main.css">
+		<script src="http://code.jquery.com/jquery-3.2.1.min.js"</script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<h1>SEARCH FOR A POKEMON!</h1>
+		<div class="container">
+			<div class="row">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" id="searchButton" onclick="searchPokemon()">Search!</button>
+					</span>
+					<input type="text" class="form-control" placeholder="Search for a pokemon by name or PokeDex number" id="searchPoke">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-2"><h5>Search for:</h5></div>
+				<div class="col-md-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<input type="checkbox" id="option1" value="idBox">  PokeDex ID #
+						</span>
+						<span class="input-group-addon">
+							<input type="checkbox" id="option2" value="heightBox">  Height
+						</span>
+						<span class="input-group-addon">
+							<input type="checkbox" id="option3" value="xpBox">  Base XP
+						</span>
+						<span class="input-group-addon">
+							<input type="checkbox" id="option4" value="typeBox">  Types
+						</span>
+						<span class="input-group-addon">
+							<input type="checkbox" id="option5" value="spriteBox">  Sprites
+						</span>
+					</div>
+				</div>
+			</div>
+			<table class="table table-bordered" id="mainTable">
+				<thead>
+					<tr>
+						<th>Pokemon Name:</th>
+						<td id="pokemonName"></td>
+					</tr>
+				</thead>
+				<tbody id="pokemonTable">
+					
+				</tbody>
+			</table>
+		</div>
+	<script src="main.js"></script>
+	</body>
+</html>
