@@ -8,6 +8,7 @@ function searchPokemon(){
 	if(pokeName == "") {
 		alert("Enter a pokemon!");
 	} else {
+		$("#pokemonTable").empty();
 		let pokeObj = {
 				name: "",
 				id: "",
@@ -15,7 +16,8 @@ function searchPokemon(){
 				baseXP: "",
 				types: [],
 				frontSprite: "",
-				backSprite: ""
+				backSprite: "",
+				abilities: ""
 		};
 		$.ajax({
 			type:'GET',
@@ -30,15 +32,17 @@ function searchPokemon(){
 			for (let i = 0; i < data.types.length; i++) {
 				pokeObj.types.push(data.types[i]);
 			}
+			// for (let i = 0; i < data.abilities.length; i++) {
+			// 	pokeObj.abilities.push(data.abilities[i]);
+			// }
 		fillTable(pokeObj);
 	})
 	}
 }
 	
 function fillTable(pokeObj2){
-	console.log(pokeObj2);
-	$(pokemonName).html(pokeObj2.name);
-	$("#pokemonTable").append('<tr><td>'+ "PokeDex ID #:" + '</td><td>' + pokeObj2.id + '</td></tr>');
+	$("#pokemonTable").append('<tr><td><b>'+ "Pokémon:" + '</b></td><td><b>' + pokeObj2.name + '</b></td></tr>');
+	$("#pokemonTable").append('<tr><td>'+ "PokéDex ID #:" + '</td><td>' + pokeObj2.id + '</td></tr>');
 	$("#pokemonTable").append('<tr><td>'+ "Height:" + '</td><td>' + pokeObj2.height + "cm" + '</td></tr>');
 	$("#pokemonTable").append('<tr><td>'+ "Base Experience:" + '</td><td>' + pokeObj2.baseXP + "XP" + '</td></tr>');
 	if (pokeObj2.types.length == 2) {
@@ -46,14 +50,16 @@ function fillTable(pokeObj2){
 	}	else {
 			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.types[0].type.name + '</td></tr>');
 		}
+	// if (pokeObj2.abilities.length == 2) {
+	// 	$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[2].ability.name + "/" + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
+	// }	else if (pokeObj2.abilities.length == 1) {
+	// 		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
+	// }
+	// 	else {
+	// 		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[0].ability.name + '</td></tr>');
+	// 	}
 	$("#pokemonTable").append('<tr><td>'+ "Sprites:" + '</td><td>' + `<img src=${pokeObj2.frontSprite} />` + `<img src=${pokeObj2.backSprite} />` + '</td></tr>');
 
-	// let table = document.getElementById('pokemonTable');
-	// let row = document.createElement('tr');
-	// let cell = document.createElement('td');
-	// row.appendChild(cell.innerHTML = "PokeDex ID #");
-	// row.appendChild(cell.innerHTML = pokeObj.id);
-	// $(pokemonTable).append(row);
 	// if ($(idBox) == true) {
 	// 	table.appendChild(row.appendChild(cell.appendChild(document.createTextNode("PokeDex ID #:"))));
 	// 	table.appendChild(row.appendChild(cell.appendChild(document.createTextNode(pokeObj.id))));
