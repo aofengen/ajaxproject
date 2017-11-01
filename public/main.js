@@ -62,7 +62,6 @@ function capFirstLetter(x) {
 }
 	
 function fillTable(pokeObj2){
-	console.log(checks);
 	if (checks.length == 0) {
 		alert("Please select at least one option");
 	} else {
