@@ -17,7 +17,7 @@ function searchPokemon(){
 				types: [],
 				frontSprite: "",
 				backSprite: "",
-				abilities: ""
+				abilities: []
 		};
 		$.ajax({
 			type:'GET',
@@ -32,9 +32,9 @@ function searchPokemon(){
 			for (let i = 0; i < data.types.length; i++) {
 				pokeObj.types.push(data.types[i]);
 			}
-			// for (let i = 0; i < data.abilities.length; i++) {
-			// 	pokeObj.abilities.push(data.abilities[i]);
-			// }
+			for (let i = 0; i < data.abilities.length; i++) {
+				pokeObj.abilities.push(data.abilities[i]);
+			}
 		fillTable(pokeObj);
 	})
 	}
@@ -50,14 +50,14 @@ function fillTable(pokeObj2){
 	}	else {
 			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.types[0].type.name + '</td></tr>');
 		}
-	// if (pokeObj2.abilities.length == 2) {
-	// 	$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[2].ability.name + "/" + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
-	// }	else if (pokeObj2.abilities.length == 1) {
-	// 		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
-	// }
-	// 	else {
-	// 		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[0].ability.name + '</td></tr>');
-	// 	}
+	if (pokeObj2.abilities.length == 2) {
+		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[2].ability.name + "/" + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
+	}	else if (pokeObj2.abilities.length == 1) {
+			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
+	}
+		else {
+			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[0].ability.name + '</td></tr>');
+		}
 	$("#pokemonTable").append('<tr><td>'+ "Sprites:" + '</td><td>' + `<img src=${pokeObj2.frontSprite} />` + `<img src=${pokeObj2.backSprite} />` + '</td></tr>');
 
 	// if ($(idBox) == true) {
