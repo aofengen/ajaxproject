@@ -9,6 +9,8 @@
 	</head>
 	<body>
 		<h1>POKéDEX</h1>
+		<br>
+		<br>
 		<div class="container">
 			<div class="row">
 				<div class="input-group">
@@ -19,32 +21,36 @@
 				</div>
 			</div>
 			<br>
-			<!-- <div class="row">
-				<div class="col-md-2"><h5>Search for:</h5></div>
-				<div class="col-md-10">
-					<div class="input-group">
-						<span class="input-group-addon">
-							<input type="checkbox" name="option" id="idBox">  PokéDex ID #
-						</span>
-						<span class="input-group-addon">
-							<input type="checkbox" name="option" id="heightBox">  Height
-						</span>
-						<span class="input-group-addon">
-							<input type="checkbox" name="option" id="xpBox">  Base XP
-						</span>
-						<span class="input-group-addon">
-							<input type="checkbox" name="option" id="typeBox">  Types
-						</span>
-						<span class="input-group-addon">
-							<input type="checkbox" name="option" id="abilitiesBox">  Abilities
-						</span>
-						<span class="input-group-addon">
-							<input type="checkbox" name="option" id="spriteBox">  Sprites
-						</span>
-					</div>
+			<div class="row">
+				<div class="input-group">
+					<span class="input-group-addon">Search for:</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="id" onclick="checkBoxes(this)">  PokéDex ID #
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="height" onclick="checkBoxes(this)">  Height
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="weight" onclick="checkBoxes(this)">  Weight
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="xp" onclick="checkBoxes(this)">  Base XP
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="stats" onclick="checkBoxes(this)">  Base Stats
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="types" onclick="checkBoxes(this)">  Types
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="abilities" onclick="checkBoxes(this)">  Abilities
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="sprites" onclick="checkBoxes(this)">  Sprites
+					</span>
 				</div>
 			</div>
-			<br> -->
+			<br>
 			<table class="table table-bordered" id="mainTable">
 				<thead id="pokeTableHead">
 					

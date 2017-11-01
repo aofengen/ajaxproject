@@ -2,10 +2,10 @@ $(document).ready(function(){
 	localStorage.clear();
 });
 
+let checks = [];
+
 function searchPokemon(){
 	let pokeName = "";
-	let idChecked = $("#idBox").val();
-	console.log(idChecked);
 	pokeName = $(searchPoke).val();
 	if(pokeName == "") {
 		alert("Enter a pokemon!");
@@ -15,8 +15,10 @@ function searchPokemon(){
 				name: "",
 				id: "",
 				height: "",
+				weight: "",
 				baseXP: "",
 				types: [],
+				stats: [],
 				frontSprite: "",
 				backSprite: "",
 				abilities: []
@@ -25,63 +27,95 @@ function searchPokemon(){
 			type:'GET',
 			url: 'https://pokeapi.co/api/v2/pokemon/' + pokeName
 		}).done(function(data){
-			pokeObj.name = data.name;
+			pokeObj.name = capFirstLetter(data.name);
 			pokeObj.id = data.id;
 			pokeObj.height = data.height;
+			pokeObj.weight = data.weight;
 			pokeObj.baseXP = data.base_experience;
 			pokeObj.frontSprite = data.sprites.front_default;
 			pokeObj.backSprite = data.sprites.back_default;
 			for (let i = 0; i < data.types.length; i++) {
-				pokeObj.types.push(data.types[i]);
+				pokeObj.types.unshift(capFirstLetter(data.types[i].type.name));
 			}
 			for (let i = 0; i < data.abilities.length; i++) {
-				pokeObj.abilities.push(data.abilities[i]);
+				pokeObj.abilities.unshift(capFirstLetter(data.abilities[i].ability.name));
+			}
+			for (let i = 0; i < data.stats.length; i++) {
+				pokeObj.stats.unshift(data.stats[i].base_stat);
 			}
 		fillTable(pokeObj);
-	})
+		})
 	}
+}
+
+function capFirstLetter(x) {
+	for (let j in x) {
+		if (j == 0) {
+			x = x.replace(x[j], x[j].toUpperCase());
+		}
+		if (x[j-1] == "-") {
+			x = x.replace(x[j], x[j].toUpperCase());
+			x = x.replace(x[j-1], " ");
+		}
+	}
+	return x;
 }
 	
 function fillTable(pokeObj2){
-	$("#pokemonTable").append('<tr><td><b>'+ "Pokémon:" + '</b></td><td><b>' + pokeObj2.name + '</b></td></tr>');
-	$("#pokemonTable").append('<tr><td>'+ "PokéDex ID #:" + '</td><td>' + pokeObj2.id + '</td></tr>');
-	$("#pokemonTable").append('<tr><td>'+ "Height:" + '</td><td>' + pokeObj2.height + "cm" + '</td></tr>');
-	$("#pokemonTable").append('<tr><td>'+ "Base Experience:" + '</td><td>' + pokeObj2.baseXP + "XP" + '</td></tr>');
-	if (pokeObj2.types.length == 2) {
-		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.types[1].type.name + "/" + pokeObj2.types[0].type.name + '</td></tr>');
-	}	else {
-			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.types[0].type.name + '</td></tr>');
+	console.log(checks);
+	if (checks.length == 0) {
+		alert("Please select at least one option");
+	} else {
+		$("#pokemonTable").append('<tr><td><b>'+ "Pokémon:" + '</b></td><td><b>' + pokeObj2.name + '</b></td></tr>');
+		if (checks.includes("id")) {
+			$("#pokemonTable").append('<tr><td>'+ "PokéDex ID #:" + '</td><td>' + pokeObj2.id + '</td></tr>');
 		}
-	if (pokeObj2.abilities.length == 3) {
-		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[2].ability.name + "/" + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
-	}	else if (pokeObj2.abilities.length == 2) {
-			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
+		if (checks.includes("height")) {
+			$("#pokemonTable").append('<tr><td>'+ "Height:" + '</td><td>' + pokeObj2.height + "cm" + '</td></tr>');
+		}
+		if (checks.includes("weight")) {
+			$("#pokemonTable").append('<tr><td>'+ "Weight:" + '</td><td>' + pokeObj2.weight + "Kg" + '</td></tr>');
+		}
+		if (checks.includes("xp")) {
+			$("#pokemonTable").append('<tr><td>'+ "Base Experience:" + '</td><td>' + pokeObj2.baseXP + "XP" + '</td></tr>');
+		}
+		if (checks.includes("stats")) {
+			$("#pokemonTable").append('<tr><td>'+ "Base Stats (HP/Attack/Defense/Special Attack/Special Defense/Speed):" + '</td><td>' +
+			 pokeObj2.stats[0] + "/" +
+			 pokeObj2.stats[1] + "/" +
+			 pokeObj2.stats[2] + "/" +
+			 pokeObj2.stats[3] + "/" +
+			 pokeObj2.stats[4] + "/" +
+			 pokeObj2.stats[5] + '</td></tr>');
+		}
+		if (checks.includes("types")) {
+			if (pokeObj2.types.length == 2) {
+				$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.types[0] + "/" + pokeObj2.types[1]+ '</td></tr>');
+			} else {
+				$("#pokemonTable").append('<tr><td>'+ "Type" + '</td><td>' + pokeObj2.types[0]+ '</td></tr>');
+			}
+		}
+		if (checks.includes("abilities")) {
+			if (pokeObj2.abilities.length == 3) {
+				$("#pokemonTable").append('<tr><td>'+ "Abilities" + '</td><td>' + pokeObj2.abilities[0] + "/" + pokeObj2.abilities[1] + "/" + pokeObj2.abilities[2] + '</td></tr>');
+			} else if (pokeObj2.abilities.length == 2) {
+				$("#pokemonTable").append('<tr><td>'+ "Abilities" + '</td><td>' + pokeObj2.abilities[0] + "/" + pokeObj2.abilities[1] + '</td></tr>');
+			} else {
+				$("#pokemonTable").append('<tr><td>'+ "Ability" + '</td><td>' + pokeObj2.abilities[0] + '</td></tr>');
+			}
+		}
+		if (checks.includes("sprites")) {
+			$("#pokemonTable").append('<tr><td>'+ "Sprites:" + '</td><td>' + `<img src=${pokeObj2.frontSprite} />` + `<img src=${pokeObj2.backSprite} />` + '</td></tr>');
+		}
 	}
-		else {
-			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[0].ability.name + '</td></tr>');
-		}
-	$("#pokemonTable").append('<tr><td>'+ "Sprites:" + '</td><td>' + `<img src=${pokeObj2.frontSprite} />` + `<img src=${pokeObj2.backSprite} />` + '</td></tr>');
+}
 
-	// if ($(idBox) == true) {
-	// 	table.appendChild(row.appendChild(cell.appendChild(document.createTextNode("PokeDex ID #:"))));
-	// 	table.appendChild(row.appendChild(cell.appendChild(document.createTextNode(pokeObj.id))));
-	// }
-	// if ($('#heightBox') == true) {
-	//	table.append('<tr><td>' + "Height:" +'</td></tr>')	
-	// 	table.appendChild(row.appendChild(cell.appendChild(document.createTextNode(pokeObj.height))));
-	// }
-	// if ($('#baseXPBox') == true) {
-	//	table.append('<tr><td>' + "Base XP Yield:" +'</td></tr>')
-	// 	table.appendChild(row.appendChild(cell.appendChild(document.createTextNode(pokeObj.baseXP))));
-	// }
-	// if ($('#typeBox') == true) {
-	//	 for (let i = 0; i < pokeObj.types.length; i++){
-		//	table.append('<tr><td>' + "Type:" +'</td></tr>')
-		//	table.appendChild(row.appendChild(cell.appendChild(document.createTextNode(pokeObj.types[i]))));
-	//	}
-	// }
-	// if ($('#spriteBox') == true) {
-	//	table.append('<tr><td>' + "Sprites:" +'</td></tr>')
-	// 	table.appendChild(row.appendChild(cell.appendChild(pokeObj.front_sprite, pokeObj.back_sprite))));
-	// }
+function checkBoxes(box) {
+	if (box.checked) {
+		checks.push(box.id);
+	} else {
+		if (checks.includes(box.id)) {
+			checks.splice(checks.indexOf(box.id), 1);
+		}
 	}
+}
