@@ -50,9 +50,9 @@ function fillTable(pokeObj2){
 	}	else {
 			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.types[0].type.name + '</td></tr>');
 		}
-	if (pokeObj2.abilities.length == 2) {
+	if (pokeObj2.abilities.length == 3) {
 		$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[2].ability.name + "/" + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
-	}	else if (pokeObj2.abilities.length == 1) {
+	}	else if (pokeObj2.abilities.length == 2) {
 			$("#pokemonTable").append('<tr><td>'+ "Types" + '</td><td>' + pokeObj2.abilities[1].ability.name + "/" + pokeObj2.abilities[0].ability.name + '</td></tr>');
 	}
 		else {
