@@ -4,6 +4,8 @@ $(document).ready(function(){
 
 function searchPokemon(){
 	let pokeName = "";
+	let idChecked = $("#idBox").val();
+	console.log(idChecked);
 	pokeName = $(searchPoke).val();
 	if(pokeName == "") {
 		alert("Enter a pokemon!");
