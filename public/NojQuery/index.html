@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>POKéDEX</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="nojQuery.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<h1>POKéDEX</h1>
+		<br>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" id="searchButton" onclick="searchPokemon()">Search!</button>
+					</span>
+					<input type="text" class="form-control" placeholder="Search for a pokemon by name or PokeDex number" id="searchPoke">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="input-group">
+					<span class="input-group-addon">Search for:</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="id" onclick="checkBoxes(this)">  PokéDex ID #
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="height" onclick="checkBoxes(this)">  Height
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="weight" onclick="checkBoxes(this)">  Weight
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="xp" onclick="checkBoxes(this)">  Base XP
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="stats" onclick="checkBoxes(this)">  Base Stats
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="types" onclick="checkBoxes(this)">  Types
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="abilities" onclick="checkBoxes(this)">  Abilities
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" name="option" id="sprites" onclick="checkBoxes(this)">  Sprites
+					</span>
+				</div>
+			</div>
+			<br>
+			<table class="table table-bordered" id="mainTable">
+				<thead id="tHead">
+					
+				</thead>
+				<tbody id="tBody">
+					
+				</tbody>
+			</table>
+		</div>
+	<script src="nojQuery.js"></script>
+	</body>
+</html>
