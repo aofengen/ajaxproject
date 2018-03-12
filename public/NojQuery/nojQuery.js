@@ -4,6 +4,9 @@ const tHead = document.getElementById("tHead");
 const tBody = document.getElementById("tBody");
 const searchPoke = document.getElementById("searchPoke");
 
+const baseURL = 'https://pokeapi.co/api/v2/pokemon/';
+let url;
+
 let checks = [];
 
 function searchPokemon(){
@@ -11,13 +14,7 @@ function searchPokemon(){
 	if(pokeName == "") {
 		alert("Enter a pokemon!");
 	} else {
-		while (tHead.firstChild) {
-            tHead.removeChild(tHead.firstChild);
-		}
-		while (tBody.firstChild) {
-            tBody.removeChild(tBody.firstChild);
-		}
-		let url = 'https://pokeapi.co/api/v2/pokemon/' + pokeName
+		url = baseURL + pokeName.toLowerCase();
 		fetch(url)
 		.then(response => {
 			console.log(response)
@@ -46,6 +43,12 @@ function fillTable(pokeObj){
 	if (checks.length == 0) {
 		alert("Please select at least one option");
 	} else {
+		while (tHead.firstChild) {
+            tHead.removeChild(tHead.firstChild);
+		}
+		while (tBody.firstChild) {
+            tBody.removeChild(tBody.firstChild);
+		}
 		tHead.innerHTML = '<tr><td><b>'+ "Pokémon:" + '</b></td><td><b>' + 
 			capFirstLetter(pokeObj.name) + '</b></td></tr>';
 		if (checks.includes("id")) {
