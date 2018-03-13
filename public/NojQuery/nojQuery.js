@@ -101,9 +101,14 @@ function fillTable(pokeObj){
 			}
 		}
 		if (checks.includes("sprites")) {
-			tBody.insertAdjacentHTML("beforeend", '<tr><td>'+ "Sprites:" + '</td><td>' + 
-				`<img src=${pokeObj.sprites.front_default} />` +
-				`<img src=${pokeObj.sprites.back_default} />` + '</td></tr>');
+			if (pokeObj.sprites.back_default == null) {
+				tBody.insertAdjacentHTML("beforeend", '<tr><td>'+ "Sprites:" + '</td><td>' + 
+				`<img src=${pokeObj.sprites.front_default} />` + '</td></tr>');
+			} else {
+				tBody.insertAdjacentHTML("beforeend", '<tr><td>'+ "Sprites:" + '</td><td>' + 
+					`<img src=${pokeObj.sprites.front_default} />` +
+					`<img src=${pokeObj.sprites.back_default} />` + '</td></tr>');
+			}
 		}
 	}
 }

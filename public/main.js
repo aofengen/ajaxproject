@@ -104,7 +104,11 @@ function fillTable(pokeObj2){
 			}
 		}
 		if (checks.includes("sprites")) {
-			$("#pokemonTable").append('<tr><td>'+ "Sprites:" + '</td><td>' + `<img src=${pokeObj2.frontSprite} />` + `<img src=${pokeObj2.backSprite} />` + '</td></tr>');
+			if (pokeObj2.backSprite == null) {
+				$("#pokemonTable").append('<tr><td>'+ "Sprites:" + '</td><td>' + `<img src=${pokeObj2.frontSprite} />` + '</td></tr>')
+			} else {
+				$("#pokemonTable").append('<tr><td>'+ "Sprites:" + '</td><td>' + `<img src=${pokeObj2.frontSprite} />` + `<img src=${pokeObj2.backSprite} />` + '</td></tr>');
+			}
 		}
 	}
 }
